@@ -1,0 +1,36 @@
+{
+  "name": "Day 03 - Header-Authenticated Webhook Gateway",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "day3-lead",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f9acb1fb-3843-4f8d-bbc9-53e2faff42a4",
+      "name": "Webhook",
+      "webhookId": "ad5b8dc3-3721-42e9-a4e9-9d8f801313f7"
+    }
+  ],
+  "pinData": {},
+  "connections": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "62c6e1c1-9e25-4d84-89e1-af771b5f329a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "12e6afb790b4a24781d78f55233a57a1053b72ff2d0639409b5ec974679991eb"
+  },
+  "nodeGroups": [],
+  "id": "C0IJE3nCOAHcIlz5",
+  "tags": []
+}

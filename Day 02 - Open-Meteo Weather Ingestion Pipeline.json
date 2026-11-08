@@ -1,0 +1,142 @@
+{
+  "name": "Day 02 - Open-Meteo Weather Ingestion Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -16
+      ],
+      "id": "43ef69b1-f74a-46f3-81f9-6ffaaf1cdc42",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://api.open-meteo.com/v1/forecast?latitude=10&longitude=8&current=temperature_2m,relative_humidity_2m",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        64,
+        -32
+      ],
+      "id": "302708e1-bb64-4d9c-b37f-01dfdade21fe",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1i8H5IiwuELpGMiuDud1U0r099BwteNjXSnS3JpykeE4",
+          "mode": "list",
+          "cachedResultName": "Day 2- get weather",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1i8H5IiwuELpGMiuDud1U0r099BwteNjXSnS3JpykeE4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1i8H5IiwuELpGMiuDud1U0r099BwteNjXSnS3JpykeE4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.current.time\n}}",
+            "Temperature_C": "={{ $json.current.temperature_2m\n}}",
+            "Humidity_Percent": "={{ $json.current.relative_humidity_2m\n}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Temperature_C",
+              "displayName": "Temperature_C",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Humidity_Percent",
+              "displayName": "Humidity_Percent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        256,
+        -32
+      ],
+      "id": "f94549e1-90b5-448f-97f8-e829f3551475",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EEzQ0GbNbRPo56mi",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "868b0a00-c8dd-4cb1-8e06-b31576f15c1c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "12e6afb790b4a24781d78f55233a57a1053b72ff2d0639409b5ec974679991eb"
+  },
+  "nodeGroups": [],
+  "id": "halbL1NC5LIddY9l",
+  "tags": []
+}
